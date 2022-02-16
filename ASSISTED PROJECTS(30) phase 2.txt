@@ -1,0 +1,5119 @@
+                           Assisted Practice Phase___2
+
+
+
+PROGRAM 1.ServletGetPost
+
+
+INDEX.HTML:
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>GET vs POST Demo</title>
+</head>
+<body>
+
+<a href="gethandler?name=John+Doe&address=145+Lake+Avenue">Do a Servlet GET</a><br><br>
+<form name=frm method=post action="posthandler">
+  Name <input name="name" id="name" maxlenght=50><br>
+  Address <input name="address" id="address" maxlength=100><br>
+  <button>Submit</button>
+</form>
+
+</body>
+</html>
+
+
+POSTHANDLER:
+
+import java.io.*;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+* Servlet implementation class PostHandler
+*/
+@WebServlet("/Posthandler")
+public class Posthandler extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public Posthandler() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                  PrintWriter out = response.getWriter();
+                    out.println("<html><body>");
+                    
+                    String name = request.getParameter("name");
+                    String address = request.getParameter("address");
+                    
+                    out.println("Name=" + name + "<br>Address=" + address);
+                    out.println("</body></html>");
+        }
+
+}
+
+
+GETHANDLER:
+
+
+
+import java.io.*;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/**
+* Servlet implementation class GetHandler
+*/
+@WebServlet("/GetHandler")
+public class GetHandler extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public GetHandler() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                  PrintWriter out = response.getWriter();
+                    out.println("<html><body>");
+                    
+                    String name = request.getParameter("name");
+                    String address = request.getParameter("address");
+                    out.println("Name=" + name + "<br>Address=" + address);
+                    out.println("</body></html>");
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+WEB.XML:
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>LoginLogout</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>GetHandler</servlet-name>
+    <servlet-class>GetHandler</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>PostHandler</servlet-name>
+    <servlet-class>PostHandler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetHandler</servlet-name>
+    <url-pattern>/gethandler</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PostHandler</servlet-name>
+    <url-pattern>/posthandler</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+
+___________________________________________________________________________________
+
+
+PROGRAM 2: FIRSTSERVLET
+
+
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class FirstServlet
+ */
+@WebServlet("/FirstServlet")
+public class FirstServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public FirstServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+
+
+WEB.XML :
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>Firstservlet</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+  </welcome-file-list>
+</web-app>
+
+
+
+PROGRAM 3:Servlet Concepts
+
+
+INDEX.XML:
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Name Servlet</title>
+</head>
+<body>
+        <center>
+                <form name=frmName method="GET" action="name">
+                        <table width="50%" border="0">
+                                <tr valign="top">
+                                        <td width="40%">Enter your firstname</td>
+                                        <td><input name="fname" id="fname" maxlength=30></td>
+                                </tr>
+                                <tr valign="top">
+                                        <td width="40%">Enter your lastname</td>
+                                        <td><input name="lname" id="lname" maxlength=30></td>
+                                </tr>
+                                        <tr valign="top">
+                                        <td colspan=2 width="100%">
+                                                <button>Submit</button>
+                                        </td>
+                                        
+                                </tr>
+                        </table>
+                </form>
+        </center>
+</body>
+</html>
+
+
+FIRSTSERVLET:
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+* Servlet implementation class NameServlet
+*/
+@WebServlet("/NameServlet")
+public class NameServlet extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public NameServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                String fname = request.getParameter("fname");
+                String lname = request.getParameter("lname");
+                
+                PrintWriter out = response.getWriter();
+            out.println("<html><body>");
+            out.println("Your full name is " + fname + " " + lname);
+            out.println("</body></html>");
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+WEB.XML:
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+* Servlet implementation class NameServlet
+*/
+@WebServlet("/NameServlet")
+public class NameServlet extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public NameServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                String fname = request.getParameter("fname");
+                String lname = request.getParameter("lname");
+                
+                PrintWriter out = response.getWriter();
+            out.println("<html><body>");
+            out.println("Your full name is " + fname + " " + lname);
+            out.println("</body></html>");
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+__________________________________________________________________________
+
+PROGRAM 4:Servlet Interface
+
+INDEX.HTML:
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Servlet Interfaces</title>
+</head>
+<body>
+
+<a href="interface">Show Servlet Interface</a>
+
+</body>
+</html>
+
+
+
+INTERFACE DEMO:
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
+
+/**
+* Servlet implementation class InterfaceDemo
+*/
+@WebServlet("/InterfaceDemo")
+public class InterfaceDemo implements Servlet {
+        
+        ServletConfig config=null;
+          public void init(ServletConfig config){
+              this.config=config;
+              System.out.println("Initialization complete");
+           }
+
+           public void service(ServletRequest req,ServletResponse res)
+           throws IOException,ServletException{
+               res.setContentType("text/html");
+               PrintWriter pwriter=res.getWriter();
+               pwriter.print("<html>");
+               pwriter.print("<body>");
+               pwriter.print("In the service() method<br>");
+               pwriter.print("</body>");
+               pwriter.print("</html>");
+           }
+           public void destroy(){
+               System.out.println("In destroy() method");
+           }
+           public ServletConfig getServletConfig(){
+               return config;
+           }
+           public String getServletInfo(){
+               return "This is a sample servlet info";
+           }
+}
+
+
+WEB.XML:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>Servlet Interface</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>InterfaceDemo</servlet-name>
+    <servlet-class>InterfaceDemo</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>InterfaceDemo</servlet-name>
+    <url-pattern>/interface</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
+
+
+_____________________________________________________________________________________________
+
+PROGRAM 5:Filter Demo
+
+
+INDEX.HTML:
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Filter Demo</title>
+</head>
+<body>
+        <a href="dashboard?userid=johndoe">Account Dashboard (allow filter)</a><br>
+        <a href="profile?userid=johndoe">Account Profile (allow filter)</a><br>
+        <a href="dashboard">Account Dashboard (block filter)</a><br>
+        <a href="info">Info Page </a><br>
+</body>
+</html>
+
+
+ACCOUNTDASHBOARD:
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+* Servlet implementation class AccountDashboard
+*/
+@WebServlet("/AccountDashboard")
+public class AccountDashboard extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public AccountDashboard() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+        
+                response.getWriter().write("I am in Account Dashboard after passing through LoginFilter");
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+ACCOUNTPROFILE:
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+* Servlet implementation class AccountProfile
+*/
+@WebServlet("/AccountProfile")
+public class AccountProfile extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public AccountProfile() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                response.getWriter().write("I am in Account Profile after passing through LoginFilter");
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+INFOPAGE:
+
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+* Servlet implementation class InfoPage
+*/
+@WebServlet("/InfoPage")
+public class InfoPage extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public InfoPage() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                response.getWriter().write("I am in InfoPage");
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+LOGINFILTER:
+
+import java.io.IOException;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
+
+/**
+* Servlet Filter implementation class LoginFilter
+*/
+@WebFilter("/LoginFilter")
+public class LoginFilter implements Filter {
+
+    /**
+* Default constructor.
+*/
+    public LoginFilter() {
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see Filter#destroy()
+         */
+        public void destroy() {
+                // TODO Auto-generated method stub
+        }
+
+        /**
+         * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
+         */
+        public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+                // TODO Auto-generated method stub
+                // place your code here
+                
+                String userId = request.getParameter("userid");
+
+                if( userId != null){
+                        chain.doFilter(request, response);
+            }
+                 
+                
+        }
+
+        /**
+         * @see Filter#init(FilterConfig)
+         */
+        public void init(FilterConfig fConfig) throws ServletException {
+                // TODO Auto-generated method stub
+        }
+
+}
+
+
+WEB.XML:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>FilterDemo</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  
+  <filter>
+    <filter-name>loginFilter</filter-name>
+    <filter-class>LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>loginFilter</filter-name>
+    <url-pattern>/dashboard</url-pattern>
+    <url-pattern>/profile</url-pattern>
+  </filter-mapping>
+  
+  
+  <servlet>
+    <servlet-name>AccountDashboard</servlet-name>
+    <servlet-class>AccountDashboard</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AccountProfile</servlet-name>
+    <servlet-class>AccountProfile</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>InfoPage</servlet-name>
+    <servlet-class>InfoPage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AccountDashboard</servlet-name>
+    <url-pattern>/dashboard</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>AccountProfile</servlet-name>
+    <url-pattern>/profile</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>InfoPage</servlet-name>
+    <url-pattern>/info</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+_____________________________________________________________________
+
+PROGRAM 6:Cookie Tracking Demo
+
+INDEX.HTML:
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+        <a href="login?userid=admin">Dashboard with cookie login</a><br>
+        <a href="dashboard">Dashboard without cookie login</a>
+</body>
+</html>
+
+
+LOGINSERVLET:
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.annotation.*;
+import javax.servlet.http.*;
+
+
+
+/**
+* Servlet implementation class LoginServlet
+*/
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public LoginServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                
+                 Cookie userId = new Cookie("userid", request.getParameter("userid"));
+                 response.addCookie(userId);
+              response.sendRedirect("dashboard");  
+                
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+DASHBOARD:
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.annotation.*;
+import javax.servlet.http.*;
+
+
+
+/**
+* Servlet implementation class Dashboard
+*/
+@WebServlet("/Dashboard")
+public class DashBoard extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public DashBoard() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+        
+                Cookie cookie = null;
+            Cookie[] cookies = null;
+            boolean found = false;
+            PrintWriter out = response.getWriter();
+            out.println("<html><body>");
+            
+            cookies = request.getCookies();
+            if (cookies != null) {
+                    for (int i = 0; i < cookies.length; i++) {
+                    cookie = cookies[i];
+                    if (cookie.getName().contentEquals("userid") && cookie.getValue() != null) {
+                        out.println("UserId read from cookie:" + cookie.getValue() + "<br>");
+                        found = true;
+                    }
+                 }
+            }
+            if (!found) {
+                out.println("No UserId was found in cookie.<br>");
+            }
+            out.println("</body></html>");
+
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+WEB.XML:
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>CookieTrackingDemo</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Dashboard</servlet-name>
+    <servlet-class>Dashboard</servlet-class>
+  </servlet>
+ 
+  <servlet-mapping>
+    <servlet-name>Dashboard</servlet-name>
+    <url-pattern>/dashboard</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+__________________________________________________________________
+PROGRAM 7:URL  Rewrite Demo
+
+
+INDEX.HTML:
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title>URL Rewriting Demo</title>
+</head>
+<body>
+        <a href="login?userid=admin">Dashboard with URL Rewriting based login</a><br>
+        <a href="dashboard">Dashboard without URL Rewriting based login</a>
+</body>
+</html>
+
+
+
+LOGINSERVLET:
+
+
+
+/**
+* Servlet implementation class LoginServlet
+*/
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public LoginServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                
+                 String userId = request.getParameter("userid");
+             response.sendRedirect("dashboard?userid=" + userId);  
+                
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+DASHBOARD:
+
+mport java.io.*;
+import javax.servlet.*;
+import javax.servlet.annotation.*;
+import javax.servlet.http.*;
+
+
+
+/**
+* Servlet implementation class Dashboard
+*/
+@WebServlet("/Dashboard")
+public class Dashboard extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public Dashboard() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+        
+            PrintWriter out = response.getWriter();
+            out.println("<html><body>");
+            
+            String userId = request.getParameter("userid");
+            if (userId == null ) {
+                out.println("No UserId was found in the URL.<br>");
+            } else {
+                out.println("UserId obtained from URL Rewriting:" + userId + "<br>");
+            }
+            out.println("</body></html>");
+
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+
+
+WEB.XML:
+web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>URLRewriteDemo</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Dashboard</servlet-name>
+    <servlet-class>Dashboard</servlet-class>
+  </servlet>
+ 
+  <servlet-mapping>
+    <servlet-name>Dashboard</servlet-name>
+    <url-pattern>/dashboard</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+_________________________________________________________________________
+
+PROGRAM 8:From Fields Tracking
+
+INDEX.HTML:
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+        <form action="login" method="post">
+                <input type=hidden name="userid" id="userid" value="admin">
+          <button>Dashboard with hidden form fields login</button>
+        </form>
+        <br><br>  
+        <a href="dashboard">Dashboard without hidden form fields login</a>
+</body>
+</html>
+
+
+
+LOGINSERVLET:
+
+import java.io.*;
+import java.io.PrintWriter;
+
+import javax.servlet.*;
+import javax.servlet.annotation.*;
+import javax.servlet.http.*;
+
+
+
+/**
+* Servlet implementation class LoginServlet
+*/
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public LoginServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                 PrintWriter out = response.getWriter();
+                 out.println("<html><body>");
+                    
+                 String userId = request.getParameter("userid");
+                 //creating a new hidden form field
+                out.println("<form action='dashboard' method='post'>");
+                out.println("<input type='hidden' name='userid' id='userid' value='"+userId+"'>");
+                out.println("<input type='submit' value='submit' >");
+                out.println("</form>");
+                out.println("<script>document.forms[0].submit();</script>");
+              
+                
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+
+
+DASHBOARD:
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.annotation.*;
+import javax.servlet.http.*;
+
+
+
+/**
+* Servlet implementation class Dashboard
+*/
+@WebServlet("/Dashboard")
+public class Dashboard extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public Dashboard() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+        
+            PrintWriter out = response.getWriter();
+            out.println("<html><body>");
+            String userId = request.getParameter("userid");
+            if (userId == null) {
+                out.println("No UserId was found in hidden form field.<br>");
+            } else {
+                out.println("UserId found in hidden form field: " + userId + "<br>");
+                
+            }
+            out.println("</body></html>");
+
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+
+WEB.XML:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>FormFieldsTracking</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Dashboard</servlet-name>
+    <servlet-class>Dashboard</servlet-class>
+  </servlet>
+ 
+  <servlet-mapping>
+    <servlet-name>Dashboard</servlet-name>
+    <url-pattern>/dashboard</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+</web-app>
+___________________________________________________________
+
+PROGRAM 9:HTTP Session Demo
+
+INDEX.HTML:
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HTTPSession Demo</title>
+</head>
+<body>
+        <a href="login?userid=admin">Dashboard with Session based login</a><br>
+        <a href="dashboard">Dashboard without Session based login</a>
+</body>
+</html>	
+
+
+
+LOGINSERVLET:
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.annotation.*;
+import javax.servlet.http.*;
+
+
+
+/**
+* Servlet implementation class LoginServlet
+*/
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public LoginServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                
+                 String userId = request.getParameter("userid");
+                 HttpSession session=request.getSession();  
+             session.setAttribute("userid",  userId);
+                          
+             response.sendRedirect("dashboard");  
+                
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+DASHBOARD:
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.annotation.*;
+import javax.servlet.http.*;
+
+
+
+/**
+* Servlet implementation class Dashboard
+*/
+@WebServlet("/Dashboard")
+public class Dashboard extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public Dashboard() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+        
+            PrintWriter out = response.getWriter();
+            out.println("<html><body>");
+            
+            HttpSession session=request.getSession(false);  
+            String userId = null;
+            if (session.getAttribute("userid") != null)
+                userId =(String)session.getAttribute("userid");  
+            if (userId == null ) {
+                out.println("No UserId was found in session.<br>");
+            } else {
+                out.println("UserId obtained from session :" + userId + "<br>");
+            }
+            out.println("</body></html>");
+
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+
+WEB.XML:
+
+ <?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>HTTPSessionDemo</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Dashboard</servlet-name>
+    <servlet-class>Dashboard</servlet-class>
+  </servlet>
+ 
+  <servlet-mapping>
+    <servlet-name>Dashboard</servlet-name>
+    <url-pattern>/dashboard</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+____________________________________________________________________________________
+
+
+PROGRAM 10:LoginLogout
+
+INDEX.HTML:
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login Logout</title>
+</head>
+<body>
+        <a href="login?userid=admin">Dashboard with Login</a><br>
+        
+</body>
+</html>
+
+
+
+LOGINSERLET:
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.annotation.*;
+import javax.servlet.http.*;
+
+
+
+/**
+* Servlet implementation class LoginServlet
+*/
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public LoginServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                
+                 String userId = request.getParameter("userid");
+                 HttpSession session=request.getSession();  
+             session.setAttribute("userid",  userId);
+                          
+             response.sendRedirect("dashboard");  
+                
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+
+DASHBOARD:
+
+
+import java.io.*;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/**
+* Servlet implementation class Dashboard
+*/
+@WebServlet("/Dashboard")
+public class Dashboard extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public Dashboard() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                  PrintWriter out = response.getWriter();
+                    out.println("<html><body>");
+                    
+                    HttpSession session=request.getSession(false);  
+                    String userId = null;
+                    if (session.getAttribute("userid") != null)
+                        userId =(String)session.getAttribute("userid");  
+                    if (userId == null ) {
+                        out.println("No UserId was found in session.<br>");
+                    } else {
+                        out.println("UserId obtained from session :" + userId + "<br>");
+                        out.println("<a href='logout'>Logout of session</a><br>");
+                    }
+                    out.println("</body></html>");
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+
+
+LOGOUT:
+
+import java.io.*;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/**
+* Servlet implementation class Logout
+*/
+@WebServlet("/Logout")
+public class Logout extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public Logout() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                HttpSession session=request.getSession();  
+                session.invalidate();           
+                PrintWriter out = response.getWriter();
+                out.println("<html><body>");
+            out.println("Logged out of session.<br>");
+            out.println("</body></html>");
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+WEB.XML:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>LoginLogout</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Dashboard</servlet-name>
+    <servlet-class>Dashboard</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>Logout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Dashboard</servlet-name>
+    <url-pattern>/dashboard</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+________________________________________________________________________________
+PROJECT-11 Set up JDBC Environment
+
+HTML FILE:
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JDBC Setup</title>
+</head>
+<body>
+<a href="init">Initialize JDBC</a><br>
+
+</body>
+</html>
+
+JDBC connection in code:
+
+package com.ecommerce;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class DBConnection {
+
+        private Connection connection;
+        
+        public DBConnection(String dbURL, String user, String pwd) throws ClassNotFoundException, SQLException{
+                
+                Class.forName("com.mysql.jdbc.Driver");
+                this.connection = DriverManager.getConnection(dbURL, user, pwd);
+        }
+        
+        public Connection getConnection(){
+                return this.connection;
+        }
+        
+        public void closeConnection() throws SQLException {
+                if (this.connection != null)
+                        this.connection.close();
+        }
+}
+
+
+DemoJDBC servlet:
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Properties;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.ecommerce.DBConnection;
+
+/**
+* Servlet implementation class DemoJDBC
+*/
+@WebServlet("/DemoJDBC")
+public class DemoJDBC extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public DemoJDBC() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                
+                try {
+                         PrintWriter out = response.getWriter();
+                         out.println("<html><body>");
+                         
+                        InputStream in = getServletContext().getResourceAsStream("/WEB-INF/config.properties");
+                        Properties props = new Properties();
+                        props.load(in);
+                        
+                        DBConnection conn = new DBConnection(props.getProperty("url"), props.getProperty("userid"), props.getProperty("password"));
+                        out.println("DB Connection initialized.<br>");
+                        
+                        conn.closeConnection();
+                        out.println("DB Connection closed.<br>");
+                        
+                        
+                        out.println("</body></html>");
+                        conn.closeConnection();
+                        
+                } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                } catch (SQLException e) {
+                        e.printStackTrace();
+                }
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+XML FILE:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>JDBCSetup</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>DemoJDBC</servlet-name>
+    <servlet-class>DemoJDBC</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DemoJDBC</servlet-name>
+    <url-pattern>/init</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
+____________________________________________________________________________________
+
+PROJECT-12: JDBC Connection Statements
+
+HTML FILE:
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JDBC Statements and Resultsets</title>
+</head>
+<body>
+<a href="list">Product Info</a><br>
+
+</body>
+</html>
+
+
+
+
+package com.ecommerce;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class DBConnection {
+
+        private Connection connection;
+        
+        public DBConnection(String dbURL, String user, String pwd) throws ClassNotFoundException, SQLException{
+                
+                Class.forName("com.mysql.jdbc.Driver");
+                this.connection = DriverManager.getConnection(dbURL, user, pwd);
+        }
+        
+        public Connection getConnection(){
+                return this.connection;
+        }
+        
+        public void closeConnection() throws SQLException {
+                if (this.connection != null)
+                        this.connection.close();
+        }
+}
+
+ProductDetails servlet:
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Properties;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.ecommerce.DBConnection;
+
+/**
+* Servlet implementation class ProductDetails
+*/
+@WebServlet("/ProductDetails")
+public class ProductDetails extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public ProductDetails() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                
+                try {
+                         PrintWriter out = response.getWriter();
+                         out.println("<html><body>");
+                         
+                        InputStream in = getServletContext().getResourceAsStream("/WEB-INF/config.properties");
+                        Properties props = new Properties();
+                        props.load(in);
+                        
+                        DBConnection conn = new DBConnection(props.getProperty("url"), props.getProperty("userid"), props.getProperty("password"));
+                        Statement stmt = conn.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                        stmt.executeUpdate("insert into eproduct (name, price, date_added) values ('New Product', 17800.00, now())");
+                        ResultSet rst = stmt.executeQuery("select * from eproduct");
+                        
+                        while (rst.next()) {
+                                out.println(rst.getInt("ID") + ", " + rst.getString("name") + "<Br>");
+                        }
+                        
+                        stmt.close();
+                        
+                        
+                        
+                        out.println("</body></html>");
+                        conn.closeConnection();
+                        
+                } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                } catch (SQLException e) {
+                        e.printStackTrace();
+                }
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+XML FILE:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>JDBC Statements and Resultsets</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>ProductDetails</servlet-name>
+    <servlet-class>ProductDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductDetails</servlet-name>
+    <url-pattern>/list</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
+____________________________________________________________
+
+PROJECT-13:Stared Procedures
+add_product in MYSQL :
+
+DELIMITER $$
+CREATE PROCEDURE add_product(IN pname varchar(100), IN pprice decimal(10,2))
+INSERT INTO eproduct (name, price) VALUES (pname, pprice)
+$$
+DELIMITER ;
+
+
+HTML FILE:
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JDBC Stored Procedures</title>
+</head>
+<body>
+<a href="list">Product Info</a><br>
+
+</body>
+</html>
+
+JDBC connection in code:
+
+package com.ecommerce;
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class DBConnection {
+
+        private Connection connection;
+        
+        public DBConnection(String dbURL, String user, String pwd) throws ClassNotFoundException, SQLException{
+                
+                Class.forName("com.mysql.jdbc.Driver");
+                this.connection = DriverManager.getConnection(dbURL, user, pwd);
+        }
+        
+        public Connection getConnection(){
+                return this.connection;
+        }
+        
+        public void closeConnection() throws SQLException {
+                if (this.connection != null)
+                        this.connection.close();
+        }
+}
+
+ProductDetails servlet:
+
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Properties;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.ecommerce.DBConnection;
+
+/**
+* Servlet implementation class ProductDetails
+*/
+@WebServlet("/ProductDetails")
+public class ProductDetails extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public ProductDetails() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                
+                try {
+                         PrintWriter out = response.getWriter();
+                         out.println("<html><body>");
+                         
+                        InputStream in = getServletContext().getResourceAsStream("/WEB-INF/config.properties");
+                        Properties props = new Properties();
+                        props.load(in);
+                        
+                        
+                        DBConnection conn = new DBConnection(props.getProperty("url"), props.getProperty("userid"), props.getProperty("password"));
+                        CallableStatement stmt = conn.getConnection().prepareCall("{call add_product(?, ?)}");
+                        stmt.setString(1, "new product");
+                        stmt.setBigDecimal(2, new BigDecimal(1900.50));
+                        stmt.executeUpdate();
+                        
+                        out.println("Stored procedure has been executed.<Br>");
+                        stmt.close();
+                        
+                        
+                        out.println("</body></html>");
+                        conn.closeConnection();
+                        
+                } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                } catch (SQLException e) {
+                        e.printStackTrace();
+                }
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+XML FILE:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>JDBC Stored Procedures</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>ProductDetails</servlet-name>
+    <servlet-class>ProductDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductDetails</servlet-name>
+    <url-pattern>/list</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
+___________________________________________________________________________
+PROJECT-14:Create select drop database
+
+HTML FILE:
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JDBC Datbase Operations</title>
+</head>
+<body>
+<a href="dboperations">Database Operations</a><br>
+
+</body>
+</html>
+
+
+JDBC connection in code:
+
+package com.ecommerce;
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class DBConnection {
+
+        private Connection connection;
+        
+        public DBConnection(String dbURL, String user, String pwd) throws ClassNotFoundException, SQLException{
+                
+                Class.forName("com.mysql.jdbc.Driver");
+                this.connection = DriverManager.getConnection(dbURL, user, pwd);
+        }
+        
+        public Connection getConnection(){
+                return this.connection;
+        }
+        
+        public void closeConnection() throws SQLException {
+                if (this.connection != null)
+                        this.connection.close();
+        }
+}
+
+DBOperations servlet:
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Properties;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.ecommerce.DBConnection;
+
+/**
+* Servlet implementation class DBOperations
+*/
+@WebServlet("/DBOperations")
+public class DBOperations extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public DBOperations() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                
+                try {
+                         PrintWriter out = response.getWriter();
+                         out.println("<html><body>");
+                         
+                        InputStream in = getServletContext().getResourceAsStream("/WEB-INF/config.properties");
+                        Properties props = new Properties();
+                        props.load(in);
+                        
+                        
+                        DBConnection conn = new DBConnection(props.getProperty("url"), props.getProperty("userid"), props.getProperty("password"));
+                        Statement stmt = conn.getConnection().createStatement();
+                        stmt.executeUpdate("create database mydatabase");
+                        out.println("Created database: mydatabase<br>");
+                        stmt.executeUpdate("use mydatabase");
+                        out.println("Selected database: mydatabase<br>");
+                        stmt.executeUpdate("drop database mydatabase");
+                        stmt.close();
+                        out.println("Dropped database: mydatabase<br>");
+                        
+                        
+                        
+                        
+                        
+                        conn.closeConnection();
+                        
+                        
+                        out.println("</body></html>");
+                        conn.closeConnection();
+                        
+                } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                } catch (SQLException e) {
+                        e.printStackTrace();
+                }
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+XML FILE:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>JDBC DB Operations</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>DBOperations</servlet-name>
+    <servlet-class>DBOperations</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DBOperations</servlet-name>
+    <url-pattern>/dboperations</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
+______________________________________________________________
+PROJECT-15:Insertion updation and delection  
+
+HTML FILE:
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JDBC Insert, Update, Delete</title>
+</head>
+<body>
+<a href="list">Product Info</a><br>
+
+</body>
+</html>
+
+JDBC connection in code:
+package com.ecommerce;
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class DBConnection {
+
+        private Connection connection;
+        
+        public DBConnection(String dbURL, String user, String pwd) throws ClassNotFoundException, SQLException{
+                
+                Class.forName("com.mysql.jdbc.Driver");
+                this.connection = DriverManager.getConnection(dbURL, user, pwd);
+        }
+        
+        public Connection getConnection(){
+                return this.connection;
+        }
+        
+        public void closeConnection() throws SQLException {
+                if (this.connection != null)
+                        this.connection.close();
+        }
+}
+
+ProductDetails servlet:
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Properties;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.ecommerce.DBConnection;
+
+/**
+* Servlet implementation class ProductDetails
+*/
+@WebServlet("/ProductDetails")
+public class ProductDetails extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public ProductDetails() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                
+                try {
+                         PrintWriter out = response.getWriter();
+                         out.println("<html><body>");
+                         
+                        InputStream in = getServletContext().getResourceAsStream("/WEB-INF/config.properties");
+                        Properties props = new Properties();
+                        props.load(in);
+                        
+                        
+                        DBConnection conn = new DBConnection(props.getProperty("url"), props.getProperty("userid"), props.getProperty("password"));
+                        Statement stmt = conn.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                        stmt.executeUpdate("insert into eproduct (name, price, date_added) values ('New Product', 17800.00, now())");
+                        out.println("Executed an insert operation<br>");
+                        
+                        stmt.executeUpdate("update eproduct set price=2000 where name = 'New Product'");
+                        out.println("Executed an update operation<br>");
+                        
+                        stmt.executeUpdate("delete from eproduct where name = 'New Product'");
+                        out.println("Executed a delete operation<br>");
+                        
+                        stmt.close();
+                        
+                        conn.closeConnection();
+                        
+                        
+                        out.println("</body></html>");
+                        conn.closeConnection();
+                        
+                } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                } catch (SQLException e) {
+                        e.printStackTrace();
+                }
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+XML FILE:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>JDBC Insert, Update, Delete</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>ProductDetails</servlet-name>
+    <servlet-class>ProductDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductDetails</servlet-name>
+    <url-pattern>/list</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
+___________________________________________________________________________________________________________
+
+PROJECT-16:Configuration of Hibernate
+
+Hibernate with hibernate.cfg.xml :
+
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>       
+  <session-factory>
+    <!-- Database connection settings -->
+    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="connection.url">jdbc:mysql://localhost:3306/ecommerce</property>
+    <property name="connection.username">mysql user id</property>
+    <property name="connection.password">mysql password</property>
+  </session-factory>
+</hibernate-configuration>
+
+HTML page index.html :
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hibernate Configuration Example</title>
+</head>
+<body>
+<a href="init">Initialize Hibernate</a><br>
+
+</body>
+</html>
+
+
+Hibernate in code:
+
+package com.ecommerce;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+public class HibernateUtil {
+
+        private static final SessionFactory sessionFactory;
+
+        static {
+                try {
+                        StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
+                                        .configure("hibernate.cfg.xml").build();
+                        Metadata metaData = new MetadataSources(standardRegistry).getMetadataBuilder().build();
+                        sessionFactory = metaData.getSessionFactoryBuilder().build();
+                } catch (Throwable th) {
+                        throw new ExceptionInInitializerError(th);
+                }
+        }
+
+        public static SessionFactory getSessionFactory() {
+                return sessionFactory;
+        }
+}
+
+InitHibernate servlet:
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.transaction.*;
+import javax.xml.bind.*;
+
+import java.io.Serializable;
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+import com.ecommerce.EProduct;
+import com.ecommerce.HibernateUtil;
+
+
+/**
+* Servlet implementation class InitHibernate
+*/
+@WebServlet("/InitHibernate")
+public class InitHibernate extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+        
+        
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public InitHibernate() {
+        super();
+        // TODO Auto-generated constructor stub
+        
+    }
+
+   
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                 try {
+                         PrintWriter out = response.getWriter();
+                         out.println("<html><body>");
+
+                         SessionFactory factory = HibernateUtil.getSessionFactory();
+                                
+                         Session session = factory.openSession();
+                         out.println("Hibernate Session opened.<br>");
+                         session.close();
+                         out.println("Hibernate Session closed.<br>");
+                                
+                         out.println("</body></html>");
+                            
+                             
+                         } catch (Exception ex) {
+                                 throw ex;
+                         }
+
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+XML FILE:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>HibernateConfig</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>InitHibernate</servlet-name>
+    <servlet-class>InitHibernate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InitHibernate</servlet-name>
+    <url-pattern>/init</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
+__________________________________________________________
+
+PROJECT-17:Hibernate configuration using Xml
+
+Hibernate with hibernate.cfg.xml:
+
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>       
+  <session-factory>
+    <!-- Database connection settings -->
+    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="connection.url">jdbc:mysql://localhost:3306/ecommerce</property>
+    <property name="connection.username">mysql user id</property>
+    <property name="connection.password">mysql password</property>
+  </session-factory>
+</hibernate-configuration>
+
+Hibernate in code:
+
+package com.ecommerce;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+public class HibernateUtil {
+
+        private static final SessionFactory sessionFactory;
+
+        static {
+                try {
+                        StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
+                                        .configure("hibernate.cfg.xml").build();
+                        Metadata metaData = new MetadataSources(standardRegistry).getMetadataBuilder().build();
+                        sessionFactory = metaData.getSessionFactoryBuilder().build();
+                } catch (Throwable th) {
+                        throw new ExceptionInInitializerError(th);
+                }
+        }
+
+        public static SessionFactory getSessionFactory() {
+                return sessionFactory;
+        }
+}
+
+HTML FILE:
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hibernate With XML</title>
+</head>
+<body>
+<a href="list”>List Products</a><br>
+
+</body>
+</html>
+
+Data Access Object (DAO) for the table:
+
+package com.ecommerce;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+public class EProduct {
+        private long ID;
+        private String name;
+        private BigDecimal price;
+        private Date dateAdded;
+        
+        public EProduct() {
+                
+        }
+        public EProduct(long id, String name, BigDecimal price, Date dateAdded) {
+                this.ID = id;
+                this.name = name;
+                this.price = price;
+                this.dateAdded = dateAdded;
+        }
+        
+        public long getID() {return this.ID; }
+        public String getName() { return this.name;}
+        public BigDecimal getPrice() { return this.price;}
+        public Date getDateAdded() { return this.dateAdded;}
+        
+        public void setID(long id) { this.ID = id;}
+        public void setName(String name) { this.name = name;}
+        public void setPrice(BigDecimal price) { this.price = price;}
+        public void setDateAdded(Date date) { this.dateAdded = date;}
+        
+        
+}
+
+ListProducts servlet:
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.transaction.*;
+import javax.xml.bind.*;
+
+import java.io.Serializable;
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+
+import com.ecommerce.EProduct;
+import com.ecommerce.HibernateUtil;
+
+/**
+* Servlet implementation class ListProducts
+*/
+@WebServlet("/ListProducts")
+public class ListProducts extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+        
+        
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public ListProducts() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                 try {
+                        SessionFactory factory = HibernateUtil.getSessionFactory();
+                        
+                        Session session = factory.openSession();
+                        // using HQL
+                        List<EProduct> list = session.createQuery("from EProduct").list();
+                        
+                        session.close();
+                        
+                         PrintWriter out = response.getWriter();
+                         out.println("<html><body>");
+                         out.println("<b>Product Listing</b><br>");
+                         for(EProduct p: list) {
+                                 out.println("ID: " + String.valueOf(p.getID()) + ", Name: " + p.getName() +
+                                                 ", Price: " + String.valueOf(p.getPrice()) + ", Date Added: " + p.getDateAdded().toString() + "<br>");
+                         }
+                         
+                     out.println("</body></html>");
+                     
+                     
+                 } catch (Exception ex) {
+                         throw ex;
+                 }
+                    
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+Hibernate with a .hbm.xml file:
+
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ecommerce">
+    <class name="EProduct" table="eproduct">
+        <id name="ID" column="ID">
+            <generator class="increment"/>
+        </id>
+        <property name="name" type="string" column="NAME"/>
+        <property name="price" type="big_decimal" column="PRICE"/>
+        <property name="dateAdded" type="timestamp" column="DATE_ADDED"/>
+
+    </class>
+</hibernate-mapping
+
+XML FILE:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>HibernateXML</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>ListProducts</servlet-name>
+    <servlet-class>ListProducts</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>ListProducts</servlet-name>
+    <url-pattern>/list</url-pattern>
+  </servlet-mapping>
+ 
+  
+</web-app>
+
+_____________________________________________________
+PROJECT-18:Hibernate configuration using Annotation
+
+Hibernate with hibernate.cfg.xml:
+
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>       
+  <session-factory>
+    <!-- Database connection settings -->
+    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="connection.url">jdbc:mysql://localhost:3306/ecommerce</property>
+    <property name="connection.username">mysql user id</property>
+    <property name="connection.password">mysql password</property>
+  </session-factory>
+</hibernate-configuration>
+
+
+Hibernate in code:
+
+package com.ecommerce;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+public class HibernateUtil {
+
+        private static final SessionFactory sessionFactory;
+
+        static {
+                try {
+                        StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
+                                        .configure("hibernate.cfg.xml").build();
+                        Metadata metaData = new MetadataSources(standardRegistry).getMetadataBuilder().build();
+                        sessionFactory = metaData.getSessionFactoryBuilder().build();
+                } catch (Throwable th) {
+                        throw new ExceptionInInitializerError(th);
+                }
+        }
+
+        public static SessionFactory getSessionFactory() {
+                return sessionFactory;
+        }
+}
+
+
+
+HTML FILE:
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hibernate Annotation Example</title>
+</head>
+<body>
+<a href="list">List Products</a><br>
+
+</body>
+</html>
+
+
+Data Access Object (DAO) for the table:
+
+package com.ecommerce;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;  
+import javax.persistence.Table;  
+  
+@Entity  
+@Table(name= "eproduct")   
+public class EProduct {    
+  
+        @Id @GeneratedValue   
+        @Column(name = "ID")
+        private long ID;
+        
+        @Column(name = "name")
+        private String name;
+        
+        @Column(name = "price")
+        private BigDecimal price;
+        
+        @Column(name = "date_added")
+        private Date dateAdded;  
+            
+        public long getID() {return this.ID; }
+        public String getName() { return this.name;}
+        public BigDecimal getPrice() { return this.price;}
+        public Date getDateAdded() { return this.dateAdded;}
+        
+        public void setID(long id) { this.ID = id;}
+        public void setName(String name) { this.name = name;}
+        public void setPrice(BigDecimal price) { this.price = price;}
+        public void setDateAdded(Date date) { this.dateAdded = date;}    
+}  
+
+ListProducts servlet:
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.transaction.*;
+import javax.xml.bind.*;
+
+import java.io.Serializable;
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+
+import com.ecommerce.EProduct;
+import com.ecommerce.HibernateUtil;
+
+/**
+* Servlet implementation class ListProducts
+*/
+@WebServlet("/ListProducts")
+public class ListProducts extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+        
+        
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public ListProducts() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                 try {
+                        SessionFactory factory = HibernateUtil.getSessionFactory();
+                        
+                        Session session = factory.openSession();
+                        // using HQL
+                        List<EProduct> list = session.createQuery("from EProduct").list();
+                        
+                        session.close();
+                        
+                         PrintWriter out = response.getWriter();
+                         out.println("<html><body>");
+                         out.println("<b>Product Listing</b><br>");
+                         for(EProduct p: list) {
+                                 out.println("ID: " + String.valueOf(p.getID()) + ", Name: " + p.getName() +
+                                                 ", Price: " + String.valueOf(p.getPrice()) + ", Date Added: " + p.getDateAdded().toString() + "<br>");
+                         }
+                         
+                     out.println("</body></html>");
+                     
+                     
+                 } catch (Exception ex) {
+                         throw ex;
+                 }
+                    
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+ 
+
+XML FILE:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>HibernateAnnotations</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>ListProducts</servlet-name>
+    <servlet-class>ListProducts</servlet-class>
+  </servlet>
+ 
+  <servlet-mapping>
+    <servlet-name>ListProducts</servlet-name>
+    <url-pattern>/list</url-pattern>
+  </servlet-mapping>
+ 
+  
+</web-app>
+
+______________________________________________________---
+
+PROJECT-19:Hibernate logging by log4j
+
+Hibernate with hibernate.cfg.xml :
+
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>       
+  <session-factory>
+    <!-- Database connection settings -->
+    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="connection.url">jdbc:mysql://localhost:3306/ecommerce</property>
+    <property name="connection.username">mysql user id</property>
+    <property name="connection.password">mysql password</property>
+  </session-factory>
+</hibernate-configuration>
+
+Configuring log4j with log4j.properties:
+
+# Direct log messages to a log file
+log4j.appender.file=org.apache.log4j.RollingFileAppender
+log4j.appender.file.File=/home/oem/Downloads/hibernate.log
+log4j.appender.file.MaxFileSize=1MB
+log4j.appender.file.MaxBackupIndex=1
+log4j.appender.file.layout=org.apache.log4j.PatternLayout
+log4j.appender.file.layout.ConversionPattern=%d{ABSOLUTE} %5p %c{1}:%L - %m%n
+ 
+# Direct log messages to stdout
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.Target=System.out
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern=%d{ABSOLUTE} %5p %c{1}:%L - %m%n
+ 
+# Root logger option
+log4j.rootLogger=INFO, file, stdout
+ 
+# Log everything. Good for troubleshooting
+log4j.logger.org.hibernate=INFO
+ 
+# Log all JDBC parameters
+log4j.logger.org.hibernate.type=ALL
+
+Hibernate in code:
+
+package com.ecommerce;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+public class HibernateUtil {
+
+        private static final SessionFactory sessionFactory;
+
+        static {
+                try {
+                        StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
+                                        .configure("hibernate.cfg.xml").build();
+                        Metadata metaData = new MetadataSources(standardRegistry).getMetadataBuilder().build();
+                        sessionFactory = metaData.getSessionFactoryBuilder().build();
+                } catch (Throwable th) {
+                        throw new ExceptionInInitializerError(th);
+                }
+        }
+
+        public static SessionFactory getSessionFactory() {
+                return sessionFactory;
+        }
+}
+
+HTML FILE:
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hibernate Configuration Example</title>
+</head>
+<body>
+<a href="init">Initialize Hibernate</a><br>
+
+</body>
+</html>
+
+InitHibernate servlet:
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.transaction.*;
+import javax.xml.bind.*;
+
+import java.io.Serializable;
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+import com.ecommerce.EProduct;
+import com.ecommerce.HibernateUtil;
+
+
+/**
+* Servlet implementation class InitHibernate
+*/
+@WebServlet("/InitHibernate")
+public class InitHibernate extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+        
+        
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public InitHibernate() {
+        super();
+        // TODO Auto-generated constructor stub
+        
+    }
+
+   
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                 try {
+                         PrintWriter out = response.getWriter();
+                         out.println("<html><body>");
+
+                         SessionFactory factory = HibernateUtil.getSessionFactory();
+                                
+                         Session session = factory.openSession();
+                         out.println("Hibernate Session opened.<br>");
+                         session.close();
+                         out.println("Hibernate Session closed.<br>");
+                                
+                         out.println("</body></html>");
+                            
+                             
+                         } catch (Exception ex) {
+                                 throw ex;
+                         }
+
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+XML FILE:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>HibernateLogging</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>InitHibernate</servlet-name>
+    <servlet-class>InitHibernate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InitHibernate</servlet-name>
+    <url-pattern>/init</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
+____________________________________________________________________________
+
+PROJECT-20:Collection mapping in Hibernate
+ 
+
+
+Creating a class Color:
+
+package com.ecommerce;
+
+
+public class Color {
+        private long COLORID;
+        private String name;
+        
+        public Color() {
+                
+        }
+        public Color(String name) {
+                this.COLORID = 0;
+                this.name = name;
+        }
+        
+        public long getCOLORID() {return this.COLORID; }
+        public String getName() { return this.name;}
+        public void setCOLORID(long id) { this.COLORID = id;}
+        public void setName(String name) { this.name = name;}
+        
+        
+}
+
+Creating a class EProduct:
+
+
+package com.ecommerce;
+
+import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+import java.util.Map;
+
+
+public class EProduct {
+        private long ID;
+        private String name;
+        private BigDecimal price;
+        private Date dateAdded;
+        private List<Color> colors;
+        private Collection<ScreenSizes> screenSizes;
+        private Set<OS> os;
+        private Map finance;
+        
+        public EProduct() {
+                
+        }
+        
+        public long getID() {return this.ID; }
+        public String getName() { return this.name;}
+        public BigDecimal getPrice() { return this.price;}
+        public Date getDateAdded() { return this.dateAdded;}
+        public List<Color> getColors() { return this.colors;}
+        public Collection<ScreenSizes> getScreensizes() { return this.screenSizes;}
+        public Set<OS> getOs() { return this.os;}
+        public Map getFinance() { return this.finance;}
+        
+        public void setID(long id) { this.ID = id;}
+        public void setName(String name) { this.name = name;}
+        public void setPrice(BigDecimal price) { this.price = price;}
+        public void setDateAdded(Date date) { this.dateAdded = date;}
+        public void setColors(List<Color> colors) { this.colors = colors;}
+        public void setScreensizes(Collection<ScreenSizes> sizes) { this.screenSizes = sizes;}
+        public void setOs(Set<OS> os) { this.os = os;}
+        public void setFinance(Map finance) { this.finance = finance;}
+}
+
+Creating a class Finance:
+
+package com.ecommerce;
+
+
+public class Finance {
+        private long FINANCEID;
+        private String name;
+        private String ftype;
+        
+        public Finance() {
+                
+        }
+        public Finance(String name, String ftype) {
+                this.FINANCEID = 0;
+                this.name = name;
+                this.ftype = ftype;
+        }
+        
+        public long getFINANCEID() {return this.FINANCEID; }
+        public String getName() { return this.name;}
+        public String getFtype() { return this.ftype;}
+        public void setFINANCEID(long id) { this.FINANCEID = id;}
+        public void setName(String name) { this.name = name;}
+        public void setFtype(String ftype) { this.ftype= ftype;}
+        
+        
+}
+
+Creating a class OS:
+
+package com.ecommerce;
+
+
+public class OS {
+
+        private long OSID;
+        private String name;
+        
+        public OS() {
+                
+        }
+        public OS(String name) {
+                this.OSID = 0;
+                this.name = name;
+        }
+        
+        public long getOSID() {return this.OSID; }
+        public String getName() { return this.name;}
+        public void setOSID(long id) { this.OSID = id;}
+        public void setName(String name) { this.name= name;}
+        
+        
+}
+
+Creating a class ScreenSizes:
+
+package com.ecommerce;
+
+
+public class ScreenSizes {
+        private long SCREENID;
+        private String size;
+        
+        public ScreenSizes() {
+                
+        }
+        public ScreenSizes(String size) {
+                this.SCREENID = 0;
+                this.size = size;
+        }
+        
+        public long getSCREENID() {return this.SCREENID; }
+        public String getSize() { return this.size;}
+        public void setSCREENID(long id) { this.SCREENID = id;}
+        public void setSize(String size) { this.size = size;}
+        
+        
+}
+
+Hibernate in code:
+
+package com.ecommerce;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+public class HibernateUtil {
+
+        private static final SessionFactory sessionFactory;
+
+        static {
+                try {
+                        StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
+                                        .configure("hibernate.cfg.xml").build();
+                        Metadata metaData = new MetadataSources(standardRegistry).getMetadataBuilder().build();
+                        sessionFactory = metaData.getSessionFactoryBuilder().build();
+                } catch (Throwable th) {
+                        throw new ExceptionInInitializerError(th);
+                }
+        }
+
+        public static SessionFactory getSessionFactory() {
+                return sessionFactory;
+        }
+}
+
+Creating hibernate table configuration file Color.hbm.xml :
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ecommerce">
+    <class name="Color" table="colors">
+        <id name="COLORID" type="long" column="ID">
+            <generator class="identity"/>
+        </id>
+        <property name="name" type="string" column="COLOR_NAME"/>
+    </class>
+</hibernate-mapping>
+
+Creating hibernate table configuration file EProduct.hbm.xml :
+
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ecommerce">
+    <class name="EProduct" table="eproduct">
+        <id name="ID" type="long" column="ID">
+            <generator class="identity"/>
+        </id>
+        <property name="name" type="string" column="NAME"/>
+        <property name="price" type="big_decimal" column="PRICE"/>
+        <property name="dateAdded" type="timestamp" column="DATE_ADDED"/>
+
+                <list name="colors" cascade="all">
+                        <key column="product_id" />
+                        <list-index column="idx" />
+                        <one-to-many class="com.ecommerce.Color" />
+                </list>
+                
+                <bag name="screensizes" cascade="all">  
+                <key column="product_id"></key>  
+                 <one-to-many class="com.ecommerce.ScreenSizes"/>
+                </bag>  
+                
+                <set name = "os" cascade="all">
+         <key column = "product_id"/>
+         <one-to-many class="OS"/>
+      </set>
+      
+      <map name = "finance" cascade="all">
+         <key column = "product_id"/>
+         <index column = "ftype" type = "string"/>
+         <one-to-many class="com.ecommerce.Finance"/>
+      </map>
+    </class>
+</hibernate-mapping>
+
+Creating hibernate table configuration file Finance.hbm.xml :
+
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ecommerce">
+    <class name="Finance" table="finance">
+        <id name="FINANCEID" type="long" column="ID">
+            <generator class="identity"/>
+        </id>
+        <property name="name" type="string" column="NAME"/>
+        <property name="ftype" type="string" column="FTYPE"/>
+    </class>
+</hibernate-mapping>
+
+Creating hibernate table configuration file Os.hbm.xml :
+
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ecommerce">
+    <class name="OS" table="os">
+        <id name="OSID" type="long" column="ID">
+            <generator class="identity"/>
+        </id>
+        <property name="name" type="string" column="NAME"/>
+    </class>
+</hibernate-mapping>
+
+Creating hibernate table configuration file ScreenSizes.hbm.xml :
+
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ecommerce">
+    <class name="ScreenSizes" table="screensizes">
+        <id name="SCREENID" type="long" column="ID">
+            <generator class="identity"/>
+        </id>
+        <property name="size" type="string" column="SIZE"/>
+    </class>
+</hibernate-mapping>
+
+Configuring Hibernate with hibernate.cfg.xml :
+
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>       
+  <session-factory>
+    <!-- Database connection settings -->
+    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="connection.url">jdbc:mysql://localhost:3306/ecommerce</property>
+    <property name="connection.username">root</property>
+    <property name="connection.password">master</property>
+    <mapping resource="com/ecommerce/EProduct.hbm.xml"/>
+    <mapping resource="com/ecommerce/Color.hbm.xml"/>
+    <mapping resource="com/ecommerce/ScreenSizes.hbm.xml"/>
+    <mapping resource="com/ecommerce/Os.hbm.xml"/>
+    <mapping resource="com/ecommerce/Finance.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>
+
+
+HTML FILE:
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hibernate Collection Mapping</title>
+</head>
+<body>
+<a href="details">Product Details</a><br>
+
+</body>
+</html>
+
+
+ProductDetails servlet :
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.transaction.*;
+import javax.xml.bind.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import com.ecommerce.Color;
+import com.ecommerce.EProduct;
+import com.ecommerce.Finance;
+import com.ecommerce.HibernateUtil;
+import com.ecommerce.OS;
+import com.ecommerce.ScreenSizes;
+
+/**
+* Servlet implementation class ProductDetails
+*/
+@WebServlet("/ProductDetails")
+public class ProductDetails extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+        
+        
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public ProductDetails() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                 try {
+                        SessionFactory factory = HibernateUtil.getSessionFactory();
+                        
+                        Session session = factory.openSession();
+                        
+                         
+                        List<EProduct> list = session.createQuery("from EProduct").list();
+                        
+                         PrintWriter out = response.getWriter();
+                         out.println("<html><body>");
+                         out.println("<b>Product Listing</b><br>");
+                         for(EProduct p: list) {
+                                 out.println("ID: " + String.valueOf(p.getID()) + ", Name: " + p.getName() +
+                                                 ", Price: " + String.valueOf(p.getPrice()) + ", Date Added: " + p.getDateAdded().toString());
+                                 
+                                 List<Color> colors = p.getColors();
+                                 out.println("Colors: ");
+                                 for(Color c: colors) {
+                                         out.print(c.getName() + "&nbsp;");
+                                 }
+                                 
+                                 Collection<ScreenSizes> sizes= p.getScreensizes();
+                                 out.println(", Screen Sizes: ");
+                                 for(ScreenSizes s: sizes) {
+                                         out.print(s.getSize() + "&nbsp;");
+                                 }
+                                 
+                                 Set<OS> os= p.getOs();
+                                 out.println(", OS : ");
+                                 for(OS o: os) {
+                                         out.print(o.getName() + "&nbsp;");
+                                 }
+                                 
+                                 Map finances = p.getFinance();
+                                 out.println(", Finance Options: ");
+                                 if (finances.get("CREDITCARD") != null) {
+                                        Finance f = (Finance) finances.get("CREDITCARD");
+                                        out.println(f.getName() + " &nbsp;");
+                                 }
+                                 if (finances.get("BANK") != null) {
+                                        Finance f = (Finance) finances.get("BANK");
+                                        out.println(f.getName() + " &nbsp;");
+                                 }
+                                 
+                                 
+                                 out.println("<hr>");
+                         }
+                                session.close();
+
+                     out.println("</body></html>");
+                     
+                     
+                 } catch (Exception ex) {
+                         throw ex;
+                 }
+                    
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+XML FILE:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>HibernateListMapping</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>ProductDetails</servlet-name>
+    <servlet-class>ProductDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductDetails</servlet-name>
+    <url-pattern>/details</url-pattern>
+  </servlet-mapping>
+</web-app>
+____________________________________________________________________________
+
+PROJECT-21: Hibernate lazy collection
+
+
+Creating a class Color :
+
+
+package com.ecommerce;
+
+
+public class Color {
+        private long COLORID;
+        private String name;
+        
+        public Color() {
+                
+        }
+        public Color(String name) {
+                this.COLORID = 0;
+                this.name = name;
+        }
+        
+        public long getCOLORID() {return this.COLORID; }
+        public String getName() { return this.name;}
+        public void setCOLORID(long id) { this.COLORID = id;}
+        public void setName(String name) { this.name = name;}
+        
+        
+}
+
+
+Creating a class EProduct :
+
+package com.ecommerce;
+
+import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+import java.util.Map;
+
+
+public class EProduct {
+        private long ID;
+        private String name;
+        private BigDecimal price;
+        private Date dateAdded;
+        private List<Color> colors;
+        private Set<Finance> finance;
+        private PDescription pdescrip;
+        
+        public EProduct() {
+                
+        }
+        
+        public long getID() {return this.ID; }
+        public String getName() { return this.name;}
+        public BigDecimal getPrice() { return this.price;}
+        public Date getDateAdded() { return this.dateAdded;}
+        public List<Color> getColors() { return this.colors;}
+        public Set<Finance> getFinance() { return this.finance;}
+        public PDescription getPdescrip() { return this.pdescrip;}
+        
+        public void setID(long id) { this.ID = id;}
+        public void setName(String name) { this.name = name;}
+        public void setPrice(BigDecimal price) { this.price = price;}
+        public void setDateAdded(Date date) { this.dateAdded = date;}
+        public void setColors(List<Color> colors) { this.colors = colors;}
+        public void setFinance(Set<Finance> finance) { this.finance = finance;}
+        public void setPdescrip(PDescription pdescrip) { this.pdescrip = pdescrip;}
+}
+
+Creating a class Finance :
+
+package com.ecommerce;
+
+
+public class Finance {
+        private long FINANCEID;
+        private String name;
+        private String ftype;
+        
+        public Finance() {
+                
+        }
+        public Finance(String name, String ftype) {
+                this.FINANCEID = 0;
+                this.name = name;
+                this.ftype = ftype;
+        }
+        
+        public long getFINANCEID() {return this.FINANCEID; }
+        public String getName() { return this.name;}
+        public String getFtype() { return this.ftype;}
+        public void setFINANCEID(long id) { this.FINANCEID = id;}
+        public void setName(String name) { this.name = name;}
+        public void setFtype(String ftype) { this.ftype= ftype;}
+        
+        
+}
+
+
+Creating a class OS :
+
+package com.ecommerce;
+
+
+public class OS {
+
+        private long OSID;
+        private String name;
+        
+        public OS() {
+                
+        }
+        public OS(String name) {
+                this.OSID = 0;
+                this.name = name;
+        }
+        
+        public long getOSID() {return this.OSID; }
+        public String getName() { return this.name;}
+        public void setOSID(long id) { this.OSID = id;}
+        public void setName(String name) { this.name= name;}
+        
+        
+}
+
+
+Creating a class ScreenSizes :
+
+package com.ecommerce;
+
+
+public class ScreenSizes {
+        private long SCREENID;
+        private String size;
+        
+        public ScreenSizes() {
+                
+        }
+        public ScreenSizes(String size) {
+                this.SCREENID = 0;
+                this.size = size;
+        }
+        
+        public long getSCREENID() {return this.SCREENID; }
+        public String getSize() { return this.size;}
+        public void setSCREENID(long id) { this.SCREENID = id;}
+        public void setSize(String size) { this.size = size;}
+        
+        
+}
+
+
+Creating a HibernateUtil class to initiate Hibernate in code :
+
+package com.ecommerce;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+public class HibernateUtil {
+
+        private static final SessionFactory sessionFactory;
+
+        static {
+                try {
+                        StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
+                                        .configure("hibernate.cfg.xml").build();
+                        Metadata metaData = new MetadataSources(standardRegistry).getMetadataBuilder().build();
+                        sessionFactory = metaData.getSessionFactoryBuilder().build();
+                } catch (Throwable th) {
+                        throw new ExceptionInInitializerError(th);
+                }
+        }
+
+        public static SessionFactory getSessionFactory() {
+                return sessionFactory;
+        }
+}
+
+Creating a hibernate table configuration file Color.hbm.xml :
+
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ecommerce">
+    <class name="Color" table="colors">
+        <id name="COLORID" type="long" column="ID">
+            <generator class="identity"/>
+        </id>
+        <property name="name" type="string" column="COLOR_NAME"/>
+    </class>
+</hibernate-mapping>
+
+Creating a hibernate table configuration file EProduct.hbm.xml :
+
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ecommerce">
+    <class name="EProduct" table="eproduct">
+        <id name="ID" type="long" column="ID">
+            <generator class="identity"/>
+        </id>
+        <property name="name" type="string" column="NAME"/>
+        <property name="price" type="big_decimal" column="PRICE"/>
+        <property name="dateAdded" type="timestamp" column="DATE_ADDED"/>
+
+                <list name="colors" cascade="all" lazy="true">
+                        <key column="product_id" />
+                        <list-index column="idx" />
+                        <one-to-many class="com.ecommerce.Color" />
+                </list>
+                
+                <bag name="screensizes" cascade="all" lazy="true">  
+                <key column="product_id"></key>  
+                 <one-to-many class="com.ecommerce.ScreenSizes"/>
+                </bag>  
+                
+                <set name = "os" cascade="all" lazy=”true”>
+         <key column = "product_id"/>
+         <one-to-many class="OS"/>
+      </set>
+      
+      <map name = "finance" cascade="all">
+         <key column = "product_id"/>
+         <index column = "ftype" type = "string"/>
+         <one-to-many class="com.ecommerce.Finance"/>
+      </map>
+    </class>
+</hibernate-mapping>
+
+Creating a hibernate table configuration file Finance.hbm.xml :
+
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ecommerce">
+    <class name="Finance" table="finance">
+        <id name="FINANCEID" type="long" column="ID">
+            <generator class="identity"/>
+        </id>
+        <property name="name" type="string" column="NAME"/>
+        <property name="ftype" type="string" column="FTYPE"/>
+    </class>
+</hibernate-mapping>
+
+
+Creating a hibernate table configuration file Os.hbm.xml :
+
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ecommerce">
+    <class name="OS" table="os">
+        <id name="OSID" type="long" column="ID">
+            <generator class="identity"/>
+        </id>
+        <property name="name" type="string" column="NAME"/>
+    </class>
+</hibernate-mapping>
+
+
+Creating a hibernate table configuration file ScreenSizes.hbm.xml :
+
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ecommerce">
+    <class name="ScreenSizes" table="screensizes">
+        <id name="SCREENID" type="long" column="ID">
+            <generator class="identity"/>
+        </id>
+        <property name="size" type="string" column="SIZE"/>
+    </class>
+</hibernate-mapping>
+
+
+Configuring Hibernate with hibernate.cfg.xml :
+
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>       
+  <session-factory>
+    <!-- Database connection settings -->
+    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="connection.url">jdbc:mysql://localhost:3306/ecommerce</property>
+    <property name="connection.username">root</property>
+    <property name="connection.password">master</property>
+    <mapping resource="com/ecommerce/EProduct.hbm.xml"/>
+    <mapping resource="com/ecommerce/Color.hbm.xml"/>
+    <mapping resource="com/ecommerce/ScreenSizes.hbm.xml"/>
+    <mapping resource="com/ecommerce/Os.hbm.xml"/>
+    <mapping resource="com/ecommerce/Finance.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>
+
+Creating an HTML page index.html :
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hibernate Collection Mapping With XML</title>
+</head>
+<body>
+<a href="details">Product Details</a><br>
+
+</body>
+</html>
+
+
+Creating a ProductDetails servlet :
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.transaction.*;
+import javax.xml.bind.*;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+import com.ecommerce.Color;
+import com.ecommerce.EProduct;
+import com.ecommerce.Finance;
+import com.ecommerce.HibernateUtil;
+import com.ecommerce.PDescription;
+
+/**
+* Servlet implementation class ProductDetails
+*/
+@WebServlet("/ProductDetails")
+public class ProductDetails extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+        
+        
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public ProductDetails() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                 try {
+                        SessionFactory factory = HibernateUtil.getSessionFactory();
+                        
+                        Session session = factory.openSession();
+                        
+                         
+                        List<EProduct> list = session.createQuery("from EProduct").list();
+                        
+                         PrintWriter out = response.getWriter();
+                         out.println("<html><body>");
+                         
+                         out.println("<b>One to One Mapping</b><br>");
+                         for(EProduct p: list) {
+                                 out.println("ID: " + String.valueOf(p.getID()) + ", Name: " + p.getName() +
+                                                 ", Price: " + String.valueOf(p.getPrice()) + ", Date Added: " + p.getDateAdded().toString());
+                                 PDescription descrip = p.getPdescrip();
+                                 out.println("<br>Description:" + descrip.getDescrip());
+                                 out.println("<hr>");
+                         }                       
+                         out.println("<b>One to Many and Many to One Mapping</b><br>");
+                         for(EProduct p: list) {
+                                 out.println("ID: " + String.valueOf(p.getID()) + ", Name: " + p.getName() +
+                                                 ", Price: " + String.valueOf(p.getPrice()) + ", Date Added: " + p.getDateAdded().toString());                           
+                                 List<Color> colors = p.getColors();
+                                 out.println("<br>Colors: <ul>");
+                                 for(Color c: colors) {
+                                         out.print("<li>" + c.getName() + "</li>");
+                                 }
+                                 out.println("</ul>");
+                                 out.println("<hr>");
+                                 
+                         }
+                         out.println("<b>Many to Many Mapping</b><br>");
+                         for(EProduct p: list) {
+                                 out.println("ID: " + String.valueOf(p.getID()) + ", Name: " + p.getName() +
+                                                 ", Price: " + String.valueOf(p.getPrice()) + ", Date Added: " + p.getDateAdded().toString());
+                                 Set<Finance> finances= p.getFinance();
+                                 out.println("<br>Finance Options : <ul>");
+                                 for(Finance f: finances) {
+                                         out.print("<li>" + f.getFtype() + "</li>");
+                                 }
+                                 out.println("</ul>");
+                                 out.println("<hr>");
+                         }
+                         
+                         
+                                session.close();
+
+                     out.println("</body></html>");
+                     
+                     
+                 } catch (Exception ex) {
+                         throw ex;
+                 }
+                    
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+XML FILE:
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>HibernateLazyCollections</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>ProductDetails</servlet-name>
+    <servlet-class>ProductDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductDetails</servlet-name>
+    <url-pattern>/details</url-pattern>
+  </servlet-mapping>
+</web-app>
+_______________________________________________________________________________
+
+
+PROJECT-22: Component mapping
+
+
+
+
+Creating a class EProduct :
+
+package com.ecommerce;
+
+import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+import java.util.Map;
+
+
+public class EProduct {
+        private long ID;
+        private String name;
+        private BigDecimal price;
+        private Date dateAdded;
+        private ProductParts parts;
+        
+        public EProduct() {
+                
+        }
+        
+        public long getID() {return this.ID; }
+        public String getName() { return this.name;}
+        public BigDecimal getPrice() { return this.price;}
+        public Date getDateAdded() { return this.dateAdded;}
+        public ProductParts getParts() { return this.parts;}
+        
+        public void setID(long id) { this.ID = id;}
+        public void setName(String name) { this.name = name;}
+        public void setPrice(BigDecimal price) { this.price = price;}
+        public void setDateAdded(Date date) { this.dateAdded = date;}
+        public void setParts(ProductParts parts) { this.parts = parts;}
+}
+
+
+Creating a class ProductParts :
+
+package com.ecommerce;
+
+public class ProductParts {
+
+        private String hdd;
+        private String cpu;
+        private String ram;
+        
+        public String getHdd() { return this.hdd;}
+        public String getCpu() { return this.cpu;}
+        public String getRam() { return this.ram;}
+        
+        public void setHdd(String value) { this.hdd= value;}
+        public void setCpu(String value) { this.cpu= value;}
+        public void setRam(String value) { this.ram= value;}
+        
+}
+
+
+Creating a HibernateUtil class to initiate Hibernate in code :
+
+
+package com.ecommerce;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+public class HibernateUtil {
+
+        private static final SessionFactory sessionFactory;
+
+        static {
+                try {
+                        StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
+                                        .configure("hibernate.cfg.xml").build();
+                        Metadata metaData = new MetadataSources(standardRegistry).getMetadataBuilder().build();
+                        sessionFactory = metaData.getSessionFactoryBuilder().build();
+                } catch (Throwable th) {
+                        throw new ExceptionInInitializerError(th);
+                }
+        }
+
+        public static SessionFactory getSessionFactory() {
+                return sessionFactory;
+        }
+}
+
+Creating a hibernate table configuration file EProduct.hbm.xml :
+
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.ecommerce">
+    <class name="EProduct" table="eproduct">
+        <id name="ID" type="long" column="ID">
+            <generator class="identity"/>
+        </id>
+        <property name="name" type="string" column="NAME"/>
+        <property name="price" type="big_decimal" column="PRICE"/>
+        <property name="dateAdded" type="timestamp" column="DATE_ADDED"/>
+
+                <component name="parts" class="com.ecommerce.ProductParts">
+                        <property name="hdd" column="parts_hdd" type="string" />
+                        <property name="cpu" column="parts_cpu" type="string" />
+                        <property name="ram" column="parts_ram" type="string" />
+                </component>      
+    </class>
+</hibernate-mapping>
+
+
+Configuring Hibernate with hibernate.cfg.xml :
+
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>       
+  <session-factory>
+    <!-- Database connection settings -->
+    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="connection.url">jdbc:mysql://localhost:3306/ecommerce</property>
+    <property name="connection.username">root</property>
+    <property name="connection.password">master</property>
+    <mapping resource="com/ecommerce/EProduct.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>
+
+
+Creating an HTML page index.html :
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hibernate Component Mapping</title>
+</head>
+<body>
+<a href="details">Product Details</a><br>
+
+</body>
+</html>
+
+
+
+Creating a ProductDetails servlet :
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.transaction.*;
+import javax.xml.bind.*;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import com.ecommerce.EProduct;
+import com.ecommerce.HibernateUtil;
+import com.ecommerce.ProductParts;
+
+
+/**
+* Servlet implementation class ProductDetails
+*/
+@WebServlet("/ProductDetails")
+public class ProductDetails extends HttpServlet {
+        private static final long serialVersionUID = 1L;
+       
+        
+        
+    /**
+* @see HttpServlet#HttpServlet()
+*/
+    public ProductDetails() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+        /**
+         * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                 try {
+                        SessionFactory factory = HibernateUtil.getSessionFactory();
+                        
+                        Session session = factory.openSession();
+                        
+                        
+                         
+                        List<EProduct> list = session.createQuery("from EProduct").list();
+                        
+                         PrintWriter out = response.getWriter();
+                         out.println("<html><body>");
+                         
+                         out.println("<b>Component Mapping</b><br>");
+                         for(EProduct p: list) {
+                                 out.println("ID: " + String.valueOf(p.getID()) + ", Name: " + p.getName() +
+                                                 ", Price: " + String.valueOf(p.getPrice()) + ", Date Added: " + p.getDateAdded().toString());
+                                 ProductParts parts = p.getParts();
+                                 out.println("Parts =" + parts.getCpu() + ", " + parts.getHdd() + ", " + parts.getRam());
+                                 out.println("<hr>");
+                         }
+                         
+                                session.close();
+
+                     out.println("</body></html>");
+                     
+                     
+                 } catch (Exception ex) {
+                         throw ex;
+                 }
+                    
+        }
+
+        /**
+         * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+         */
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                // TODO Auto-generated method stub
+                doGet(request, response);
+        }
+
+}
+
+
+Configuring web.xml :
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>HibernateComponentMapping</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>ProductDetails</servlet-name>
+    <servlet-class>ProductDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductDetails</servlet-name>
+    <url-pattern>/details</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+______________________________________________________
+
+PROJECT-23: Integration ofn Hibernate with spring
+
+Creating pom.xml for including the required components :
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>SpringHibernateWeb</groupId>
+  <artifactId>SpringHibernateWeb</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>SpringHibernateWeb Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  
+    <!-- JBoss repository for Hibernate -->
+    <repositories>
+        <repository>
+            <id>JBoss repository</id>
+            <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+   <properties>
+    <org.springframework.version>3.0.5.RELEASE</org.springframework.version>
+  </properties>
+ 
+ 
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    
+     <dependency>
+    <groupId>org.hibernate.javax.persistence</groupId>
+    <artifactId>hibernate-jpa-2.1-api</artifactId>
+    <version>1.0.0.Final</version>
+</dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>${org.springframework.version}</version>
+    </dependency>
+ 
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-expression</artifactId>
+      <version>${org.springframework.version}</version>
+    </dependency>
+ 
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <version>${org.springframework.version}</version>
+    </dependency>
+ 
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${org.springframework.version}</version>
+    </dependency>
+ 
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context-support</artifactId>
+      <version>${org.springframework.version}</version>
+    </dependency>
+      
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${org.springframework.version}</version>
+    </dependency>
+ 
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>${org.springframework.version}</version>
+    </dependency>
+ 
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>${org.springframework.version}</version>
+    </dependency>
+ 
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${org.springframework.version}</version>
+    </dependency>
+     
+    <dependency>
+       <groupId>log4j</groupId>
+       <artifactId>log4j</artifactId>
+       <version>1.2.16</version>
+       <scope>runtime</scope>
+     </dependency>
+      
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>3.6.3.Final</version>
+    </dependency>
+ 
+    <dependency>
+        <groupId>javassist</groupId>
+        <artifactId>javassist</artifactId>
+        <version>3.12.1.GA</version>
+    </dependency>
+  
+  
+     
+    <dependency>
+        <groupId>taglibs</groupId>
+        <artifactId>standard</artifactId>
+        <version>1.1.2</version>
+        <scope>runtime</scope>
+    </dependency>
+     
+    <dependency>
+      <groupId>commons-dbcp</groupId>
+      <artifactId>commons-dbcp</artifactId>
+      <version>1.4</version>
+    </dependency>
+         
+   <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>5.1.9</version>
+    </dependency>
+ 
+
+  </dependencies>
+  <build>
+    <finalName>SpringHibernateWeb</finalName>
+  </build>
+</project>
+
+
+
+
+Creating an Entity class EProductEntity :
+
+package com.ecommerce.entity;
+
+import java.math.BigDecimal;
+import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;  
+
+@Entity  
+@Table(name= "eproduct")   
+public class EProductEntity {
+
+
+        @Id @GeneratedValue   
+        @Column(name = "ID")
+        private long ID;
+        
+        @Column(name = "name")
+        private String name;
+        
+        @Column(name = "price")
+        private BigDecimal price;
+        
+        @Column(name = "date_added")
+        private Date dateAdded;  
+        
+        public long getID() {return this.ID; }
+        public String getName() { return this.name;}
+        public BigDecimal getPrice() { return this.price;}
+        public Date getDateAdded() { return this.dateAdded;}
+        
+        public void setID(long id) { this.ID = id;}
+        public void setName(String name) { this.name = name;}
+        public void setPrice(BigDecimal price) { this.price = price;}
+        public void setDateAdded(Date date) { this.dateAdded = date;}   
+}
+
+
+Creating a DAO class EProductDAO :
+
+package com.ecommerce.dao;
+
+import java.util.List;
+
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.ecommerce.entity.EProductEntity;
+
+@Repository
+public class EProductDAO {
+
+        @Autowired
+    private SessionFactory sessionFactory;
+
+        @SuppressWarnings("unchecked")
+        public List<EProductEntity> getAllProducts() {
+                return this.sessionFactory.getCurrentSession().createQuery("from EProducts").list();
+        }
+}
+
+Creating a Controller class EProductController :
+
+package com.ecommerce.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+ 
+import com.ecommerce.entity.EProductEntity;
+import com.ecommerce.service.EProductService;
+
+@Controller
+public class EProductController {
+
+        @Autowired
+            private EProductService eproductService;
+            @RequestMapping(value = "/productList", method = RequestMethod.GET)
+            public String listProducts(ModelMap map)
+            {
+                map.addAttribute("eproduct", new EProductEntity());
+                map.addAttribute("productList", eproductService.getAllProducts());
+                return "productList";
+            }
+}
+
+Creating the dispatcher servlet eproduct-servlet.xml :
+
+<?xml  version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jee="http://www.springframework.org/schema/jee"
+    xmlns:lang="http://www.springframework.org/schema/lang"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/aop/ http://www.springframework.org/schema/aop/spring-aop.xsd
+http://www.springframework.org/schema/context/ http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/jee/ http://www.springframework.org/schema/jee/spring-jee.xsd
+http://www.springframework.org/schema/lang/ http://www.springframework.org/schema/lang/spring-lang.xsd
+http://www.springframework.org/schema/tx/ http://www.springframework.org/schema/tx/spring-tx.xsd
+http://www.springframework.org/schema/util/ http://www.springframework.org/schema/util/spring-util.xsd">
+    <context:annotation-config />
+    <context:component-scan base-package="com.ecommerce.controller" />
+    <bean id="jspViewResolver"
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass"
+            value="org.springframework.web.servlet.view.JstlView"></property>
+        <property name="prefix" value="/WEB-INF/view/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+    <bean id="messageSource"
+        class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="classpath:messages"></property>
+        <property name="defaultEncoding" value="UTF-8"></property>
+    </bean>
+    <bean id="propertyConfigurer"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+        p:location="/WEB-INF/jdbc.properties"></bean>
+    <bean id="dataSource"
+        class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
+        p:driverClassName="${jdbc.driverClassName}"
+        p:url="${jdbc.databaseurl}" p:username="${jdbc.username}"
+        p:password="${jdbc.password}"></bean>
+    <bean id="sessionFactory"
+        class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="configLocation">
+            <value>classpath:hibernate.cfg.xml</value>
+        </property>
+        <property name="configurationClass">
+            <value>org.hibernate.cfg.AnnotationConfiguration</value>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${jdbc.dialect}</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="eproductDAO" class="com.ecommerce.dao.EProductDAO"></bean>
+    <bean id="eproductService" class="com.ecommerce.service.EProductService"></bean>
+    <tx:annotation-driven />
+    <bean id="transactionManager"
+        class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+</beans>
+
+
+
+Creating a view productList.jsp to display the products :
+
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<html>
+    <head>
+        <title>Spring With Hibernate</title>
+    </head>
+    <body>
+    <h3>Product List </h3>
+    <c:if  test="${!empty productList}">
+    <table class="data">
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Date Added</th>
+    </tr>
+    <c:forEach items="${productList}" var="product">
+        <tr>
+            <td>${product.name} </td>
+            <td>${product.price}</td>
+            <td>${product.date_added}</td>
+        </tr>
+    </c:forEach>
+    </table>
+    </c:if>
+    </body>
+</html>
+
+
+Editing index.jsp :
+
+<html>
+<body>
+<h2>Spring With Hibernate</h2>
+<a href="/productList">Product List</a>
+</body>
+</html>
+
+
+Configuring Hibernate with hibernate.cfg.xml :
+
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+ 
+<hibernate-configuration>
+    <session-factory>
+        <mapping class="com.ecommerce.entity.EProductEntity"></mapping>
+    </session-factory>
+</hibernate-configuration>
+
+
+Configuring web.xml :
+
+<!DOCTYPE web-app PUBLIC
+"-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+"http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  
+   <welcome-file-list>
+        <welcome-file>/WEB-INF/view/index.jsp</welcome-file>
+    </welcome-file-list>
+    <servlet>
+        <servlet-name>eproduct</servlet-name>
+        <servlet-class>
+            org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>eproduct</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/eproduct-servlet.xml</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+  
+</web-app>
+______________________________________________________
+
+
+PROJECT 24:creating a simple JSP Page
+
+INDEX.JSP:
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"     pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Simple JSP</title>
+</head>
+<body>
+<%
+        out.println("<h2>My first JSP page.</h2>");
+%>
+</body>
+</html>
+
+
+______________________________________
+PROJECT 25:JSP Implicit objects
+
+INDEX.JSP:
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+<%@ page errorPage = "handle-error.jsp" %>    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JSP Implicit Objects</title>
+</head>
+<body>
+
+<%
+        String responseCheck = request.getParameter("office");
+        if (responseCheck != null ) {
+                 response.setStatus(response.SC_MOVED_TEMPORARILY);
+                 response.setHeader("Location", "response-redirect.jsp?office=" + responseCheck);
+        }
+        
+        String errorCheck = request.getParameter("error");
+        if (errorCheck != null ) {
+                 int x = 0;
+                 if (x == 0)
+                         throw new RuntimeException("Exception has been raised");
+        }
+%>
+<%
+
+   int serverPort =  request.getServerPort() ;
+   out.println("The Server is running on port " + String.valueOf(serverPort) + "<br>");
+   out.println("Servlet Name is " + config.getServletName() + "<br>");
+   out.println("Server Info:" + application.getServerInfo() + "<br>");
+   
+   String pageName = page.toString();
+   out.println("The name of the page is " + pageName + "<br>");
+   
+   pageContext.setAttribute("userid", "John Doe");
+   out.println("userId attribute from pageContext: " + pageContext.getAttribute("userid") + "<br>");    
+%>
+<a href="index.jsp?office=head_office">Show usage of response object</a><br>
+<a href="index.jsp?error=1">Show usage of error  object</a><br>
+
+
+<%
+   if (response.containsHeader("Office"))
+            out.println("Current location is " + response.getHeader("Office"));
+ %>
+ 
+
+
+
+ 
+</body>
+</html>
+
+
+
+RESPONSE-REDIRECT.JSP:
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Get Header Example</title>
+</head>
+<body>
+
+<%
+        String office = request.getParameter("office");
+        if (office != null)
+                out.println("value of Office obtained :" + office + "<br>");
+        else
+                out.println("No value of Office found<br>");
+%>
+
+</body>
+</html>
+___________________________________________________________________
+
+PROJECT 26:JSP directives
+
+INDEX.JSP:
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+   <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
+
+<!DOCTYPE html>
+<!--
+Download jstl.jar from http://central.maven.org/maven2/javax/servlet/jstl/1.2/jstl-1.2.jar
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JSP Directives</title>
+</head>
+<body>
+
+This is content from the main file.
+<%@ include file="included.jsp" %>
+<hr>
+Example of using JSTL taglibs for formatting output<br>
+<p>
+        Currency = <fmt:formatNumber value = "145" type = "currency"/>
+<p>
+<p>
+        <c:set var = "now" value = "<%= new java.util.Date()%>" />
+        Current date and time is <fmt:formatDate pattern = "yyyy-MM-dd hh:mm:ss" value = "${now}" />
+</p>
+
+</body>
+</html>
+
+
+INCLUDED.JSP:
+
+<% out.println("This is content from included file.<br><br>"); %>
+
+__________________________________________________________________________
+PROJECT 27:JSP action tags
+
+INDEX.JSP:
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JSP Action Tags</title>
+</head>
+<body>
+Usage of useBean tag<br>
+<jsp:useBean id="productBean" class="com.ecommerce.ProductBean" scope="session"></jsp:useBean>
+        <jsp:setProperty property="productId" name="productBean" value="18791"/>
+        <jsp:setProperty property="productName" name="productBean" value="Optical Wireless Mouse"/>
+        <jsp:setProperty property="price" name="productBean" value="600.00"/>
+
+<a href="showbean.jsp">Access bean properties from another page</a><br>
+<a href="forward.jsp">Use Forward action to go to Google</a><br>
+
+<hr>
+
+<jsp:text>
+        <![CDATA[This is my content.<br/>This will show within a text action tag exactly as it has been entered]]>
+</jsp:text>
+
+</body>
+</html>
+
+
+FORWARDED.JSP:
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+
+<jsp:forward page="forwarded.jsp"></jsp:forward>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Forward Test</title>
+</head>
+<body>
+This page came from forward.jsp by using jsp:forward action tag
+
+</body>
+</html>
+
+
+SHOWBEAN.JSP:
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Display Bean properties</title>
+</head>
+<body>
+<jsp:useBean id="productBean" class="com.ecommerce.ProductBean" scope="session"></jsp:useBean>
+        Product Id:    <jsp:getProperty name="productBean" property="productId" />  <br>
+        Product Name:    <jsp:getProperty name="productBean" property="productName" />  <br>
+        Product Price:    <jsp:getProperty name="productBean" property="price" />  <br>
+
+</body>
+</html>
+
+
+
+PRODUCTBEAN:
+
+package com.ecommerce;
+import java.io.Serializable;
+
+public class ProductBean implements Serializable{
+        private String productId;
+        private String productName;
+        private double price;
+        
+        public void setProductId(String value) {
+                this.productId = value;
+        }
+        public void setProductName(String value) {
+                this.productName = value;
+        }
+        public void setPrice(double value) {
+                this.price = value;
+        }
+        
+        public String getProductId() {
+                return this.productId;
+        }
+        public String getProductName() {
+                return this.productName;
+        }
+        public double getPrice() {
+                return this.price;
+        }
+        
+
+}
+
+
+_______________________________________________________________
+
+PROGRAM 28:session handling
+
+INDEX.JSP:
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JSP Sessions</title>
+</head>
+<body>
+<%
+  if (request.getParameter("error") != null)
+          out.println("<b>Your session has expired or is invalid.</b><br>");
+%>
+<form action="login.jsp" metho="post">
+  Name <input name="name" id="name" maxlength=40><br>
+  Password <input type="password" name="pwd" id="pwd" maxlength="10"><br>
+  <button>Submit</button>
+  
+</form>
+</body>
+</html>
+
+
+
+LOGIN.JSP:
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+<%
+
+        String name = request.getParameter("name");
+        String pwd = request.getParameter("pwd");
+        
+        if (name == null || name.equals("") || pwd == null || pwd.equals("")) {
+                response.sendRedirect("index.jsp?error=1");
+        } else {
+                
+                session.setAttribute("name", name);
+                response.sendRedirect("dashboard.jsp");
+                
+        }
+%>
+
+
+DASHBOARD.JSP:
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Dashboard</title>
+</head>
+<body>
+<%
+        if (session.getAttribute("name") == null) {
+                response.sendRedirect("index.jsp?error=1");
+        }
+%>
+<b>Hello <%= session.getAttribute("name") %></b><br>
+<a href="logout.jsp">Click here to logout</a>
+</body>
+</html>
+
+
+
+LOGOUT.JSP:
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Session Logout</title>
+</head>
+<body>
+<%
+        session.invalidate();
+%>
+<b>Your session has terminated.</b><br>
+<a href="index.jsp">Login again</a>
+</body>
+</html>
+
+
+
+
+
